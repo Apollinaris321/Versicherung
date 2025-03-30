@@ -1,0 +1,4 @@
+- [ ] IO read in csv to database
+- [ ] Eingabe Rest (Kilometer, Plz Fahrzeugtyp)
+- [ ] Fahrzeugtyp muss frei gewählt werden
+- [ ] 
