@@ -7,10 +7,10 @@ Sie können Ihre eigene MySQL Datenbank anbinden, ansonsten habe ich eine in Doc
 Hierfür bitte im "src/main/resources/application.properties" die Zeile 8 verwenden anstatt 9:
 
 # Wichtig
-Wenn der Docker Container genutzt wird das Passwort nehmen:
+Wenn der Docker Container genutzt wird das Passwort nehmen (Zeile 8):
 spring.datasource.password=password
 
-diese Zeile auskommentieren: 
+diese Zeile auskommentieren (Zeile 10): 
 spring.datasource.password=
 
 Der Container kann gestartet werden über: 
