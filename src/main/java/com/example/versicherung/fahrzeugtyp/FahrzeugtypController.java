@@ -14,6 +14,9 @@ public class FahrzeugtypController {
     @Autowired
     private FahrzeugtypRepository fahrzeugtypRepository;
 
+    @Autowired
+    IFahrzeugtypService fahrzeugtypService;
+
     @PostMapping("/add")
     public ResponseEntity<?> addFahrzeugtyp(@RequestBody Fahrzeugtyp fahrzeugtypDTO) {
         if(fahrzeugtypDTO.getFahrzeugtyp() == null || fahrzeugtypDTO.getFahrzeugtyp().trim().isEmpty()){
@@ -22,22 +25,26 @@ public class FahrzeugtypController {
         if(fahrzeugtypDTO.getFaktor() == null || fahrzeugtypDTO.getFaktor() < 0) {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Faktor muss eine positive Zahl sein!");
         }
-        if(fahrzeugtypRepository.existsByFahrzeugtyp(fahrzeugtypDTO.getFahrzeugtyp())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Fahrzeugtyp mit diesem Namen existiert bereits!");
-        }
 
-        Fahrzeugtyp fahrzeugtyp = new Fahrzeugtyp(fahrzeugtypDTO.getFahrzeugtyp(), fahrzeugtypDTO.getFaktor());
-        fahrzeugtypRepository.save(fahrzeugtyp);
-        return ResponseEntity.status(HttpStatus.CREATED).body(fahrzeugtyp);
+        Fahrzeugtyp fahrzeugtyp = fahrzeugtypService.addFahrzeugtyp(fahrzeugtypDTO);
+        if(fahrzeugtyp != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(fahrzeugtyp);
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Farzeugtyp konnte nicht gespeichert werden!");
+        }
     }
 
     @PutMapping("/update/{fahrzeugtypName}")
     public ResponseEntity<?> updateFahrzeugtypFaktor(@RequestBody Fahrzeugtyp fahrzeugtypDTO) {
-        Optional<Fahrzeugtyp> existingFahrzeugtyp = fahrzeugtypRepository.findByFahrzeugtyp(fahrzeugtypDTO.getFahrzeugtyp());
-        if (existingFahrzeugtyp.isPresent()) {
-            Fahrzeugtyp fahrzeugtyp = existingFahrzeugtyp.get();
-            fahrzeugtyp.setFaktor(fahrzeugtypDTO.getFaktor());
-            fahrzeugtypRepository.save(fahrzeugtyp);
+        if(fahrzeugtypDTO.getFahrzeugtyp() == null || fahrzeugtypDTO.getFahrzeugtyp().trim().isEmpty()){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Fahrzeugtyp darf nicht leer sein!");
+        }
+        if(fahrzeugtypDTO.getFaktor() == null || fahrzeugtypDTO.getFaktor() < 0) {
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Faktor muss eine positive Zahl sein!");
+        }
+
+        Fahrzeugtyp fahrzeugtyp =  fahrzeugtypService.updateFahrzeugtypFaktor(fahrzeugtypDTO);
+        if (fahrzeugtyp != null) {
             return ResponseEntity.ok(fahrzeugtyp);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fahrzeugtyp existiert nicht!");
@@ -45,10 +52,10 @@ public class FahrzeugtypController {
     }
 
     @GetMapping("/{fahrzeugtyp}")
-    public ResponseEntity<?> getFahrzeugtyp(@PathVariable String fahrzeugtyp) {
-        Optional<Fahrzeugtyp> fahrzeugtypOptional = fahrzeugtypRepository.findByFahrzeugtyp(fahrzeugtyp);
-        if(fahrzeugtypOptional.isPresent()){
-            return ResponseEntity.ok(fahrzeugtypOptional.get());
+    public ResponseEntity<?> getFahrzeugtyp(@PathVariable String fahrzeugtypName) {
+        Fahrzeugtyp fahrzeugtyp =  fahrzeugtypService.getFahrzeugtyp(fahrzeugtypName);
+        if(fahrzeugtyp != null){
+            return ResponseEntity.ok(fahrzeugtyp);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fahrzeugtyp nicht gefunden!");
         }
@@ -56,15 +63,13 @@ public class FahrzeugtypController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Fahrzeugtyp>> getAllFahrzeugtypen() {
-        List<Fahrzeugtyp> fahrzeugtypen = (List<Fahrzeugtyp>) fahrzeugtypRepository.findAll();
+        List<Fahrzeugtyp> fahrzeugtypen = fahrzeugtypService.getAllFahrzeugtypen();
         return ResponseEntity.ok(fahrzeugtypen);
     }
 
     @DeleteMapping("/{fahrzeugtyp}")
     public ResponseEntity<?> deleteFahrzeugtyp(@PathVariable String fahrzeugtyp) {
-        Optional<Fahrzeugtyp> fahrzeugtypOptional = fahrzeugtypRepository.findByFahrzeugtyp(fahrzeugtyp);
-        if(fahrzeugtypOptional.isPresent()){
-            fahrzeugtypRepository.deleteByFahrzeugtyp(fahrzeugtyp);
+        if(fahrzeugtypService.deleteFahrzeugtyp(fahrzeugtyp)){
             return ResponseEntity.ok().body("Fahrzeugtyp gelöscht!");
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fahrzeugtyp nicht gefunden!");

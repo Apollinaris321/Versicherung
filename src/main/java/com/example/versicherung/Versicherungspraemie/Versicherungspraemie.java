@@ -22,15 +22,15 @@ public class Versicherungspraemie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "fahrzeugtyp", nullable = false)
     private Fahrzeugtyp fahrzeugtyp;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "bundesland", nullable = false)
     private Region region;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "kilometerleistung_id", nullable = false)
     private Kilometerleistung km;
 

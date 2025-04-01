@@ -18,46 +18,38 @@ public class KilometerleistungController {
     KilometerleistungRepository kilometerleistungRepository;
 
     @Autowired
-    KilometerleistungService kilometerleistungService;
+    IKilometerleistungService kilometerleistungService;
 
     @PostMapping("/new")
     public ResponseEntity<?> addKilometerleistung(@RequestBody KilometerleistungDTO kilometerleistungDTO){
-        if(kilometerleistungDTO.getFaktor() < 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Kilometerleistungsfaktor muss positiv sein!");
+        try {
+            Kilometerleistung km = kilometerleistungService.addKilometerleistung(kilometerleistungDTO);
+            return ResponseEntity.ok().body(km);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        if(kilometerleistungDTO.getVon() < 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Kilometeleistung -von- muss positiv sein!");
-        }
-        if(kilometerleistungDTO.getBis() > 0 && kilometerleistungDTO.getVon() > kilometerleistungDTO.getBis()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Kilometeleistung -von- muss größer sein als -bis- Wert!");
-        }
-
-        Kilometerleistung kilometerleistung = new Kilometerleistung(kilometerleistungDTO.getVon(), kilometerleistungDTO.getBis(), kilometerleistungDTO.getFaktor());
-        kilometerleistungRepository.save(kilometerleistung);
-        return ResponseEntity.ok().body(kilometerleistung);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getKilometerleistung(@RequestParam Long id){
-        Optional<Kilometerleistung> kilometerleistung = kilometerleistungRepository.findById(id);
-        if(kilometerleistung.isPresent()){
-            return ResponseEntity.ok().body(kilometerleistung.get());
+        Kilometerleistung km = kilometerleistungService.getKilometerleistung(id);
+        if(km != null){
+            return ResponseEntity.ok().body(km);
         }else{
-            return ResponseEntity.badRequest().body("Kilometerleistung with this id not found!");
+            return ResponseEntity.badRequest().body("Kilometerleistung nicht gefunden!");
         }
     }
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllKilometerleistung(){
-        List<Kilometerleistung> liste = (List<Kilometerleistung>)kilometerleistungRepository.findAll();
+        List<Kilometerleistung> liste = kilometerleistungService.getAllKilometerleistung();
         return ResponseEntity.ok().body(liste);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteKilometerleistung(@RequestParam Long id){
-        Optional<Kilometerleistung> kilometerleistung = kilometerleistungRepository.findById(id);
-        if(kilometerleistung.isPresent()){
-            kilometerleistungRepository.deleteById(id);
+        Boolean isDeleted = kilometerleistungService.deleteKilometerleistung(id);
+        if(isDeleted){
             return ResponseEntity.ok().body("Kilometerleistung deleted!");
         }else{
             return ResponseEntity.badRequest().body("Kilometerleistung with this id not found!");

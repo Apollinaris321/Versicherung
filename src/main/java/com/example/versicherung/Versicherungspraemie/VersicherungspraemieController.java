@@ -19,46 +19,18 @@ import java.util.Optional;
 public class VersicherungspraemieController {
 
     @Autowired
-    VersicherungspraemienRepository verischerungspraemieRepository;
-
-    @Autowired
-    FahrzeugtypRepository fahrzeugtypRepository;
-
-    @Autowired
-    PostleitzahlRepository postleitzahlRepository;
-
-    @Autowired
-    RegionRepository regionRepository;
-
-    @Autowired
-    KilometerleistungService kilometerleistungService;
+    IVersicherungspraemieService versicherungspraemieService;
 
     @PostMapping("/submit")
     public ResponseEntity<?> handlePraemie(@RequestBody AnfrageDTO anfrageDTO) {
-
-        Postleitzahl plz = postleitzahlRepository.findDistinctFirstByPlz(anfrageDTO.getPlz());
-        Optional<Region> regionOptional = regionRepository.findByBundesland(plz.getBundesland());
-        if(regionOptional.isEmpty()){
-            return ResponseEntity.badRequest().body("Region nicht vorhanden!");
+        if(!anfrageDTO.getPlz().matches("\\d{5}")){
+            return ResponseEntity.badRequest().body("Plz nicht valide!");
         }
-        Region region = regionOptional.get();
-
-        Optional<Fahrzeugtyp> fahrzeugtypOptional = fahrzeugtypRepository.findByFahrzeugtyp(anfrageDTO.getFahrzeugtyp());
-        if(fahrzeugtypOptional.isEmpty()){
-            return ResponseEntity.badRequest().body("Fahrzeugtyp nicht vorhanden!");
+        try{
+            Versicherungspraemie vp = versicherungspraemieService.handlePraemie(anfrageDTO);
+            return ResponseEntity.ok().body(vp);
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        Fahrzeugtyp fahrzeugtyp = fahrzeugtypOptional.get();
-
-        Kilometerleistung km = kilometerleistungService.getKilometerleistung(anfrageDTO.getKilometerleistung());
-        if(km == null){
-            return ResponseEntity.badRequest().body("Kilometerleistung nicht vorhanden!");
-        }
-
-        Versicherungspraemie vp = new Versicherungspraemie(fahrzeugtyp, region, km);
-        Double praemie = vp.getPraemie();
-
-        verischerungspraemieRepository.save(vp);
-
-        return ResponseEntity.ok().body(praemie);
     }
 }

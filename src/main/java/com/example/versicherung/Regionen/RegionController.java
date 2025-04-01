@@ -15,24 +15,24 @@ public class RegionController {
     @Autowired
     RegionRepository regionRepository;
 
+    @Autowired
+    IRegionService regionService;
+
     @PostMapping("/new")
     public ResponseEntity<?> addRegion(@RequestBody Region region){
-        if(region.getFaktor() < 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Regionfaktor muss positiv sein!");
+        try{
+            regionService.addRegion(region);
+            return ResponseEntity.ok().body(region);
+        }catch(IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        if(region.getBundesland().isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Kein Bundesland angegeben!");
-        }
-
-        regionRepository.save(region);
-        return ResponseEntity.ok().body(region);
     }
 
     @GetMapping("/{bundesland}")
     public ResponseEntity<?> getRegionByBundesland(@PathVariable String bundesland){
-        Optional<Region> region = regionRepository.findByBundesland(bundesland);
-        if(region.isPresent()){
-            return ResponseEntity.ok().body(region.get());
+        Region region = regionService.getRegionByBundesland(bundesland);
+        if(region != null){
+            return ResponseEntity.ok().body(region);
         }else{
             return ResponseEntity.badRequest().body("Bundesland nicht gefunden!");
         }
@@ -40,17 +40,14 @@ public class RegionController {
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllRegions(){
-        List<Region> regions = (List<Region>)regionRepository.findAll();
+        List<Region> regions = regionService.getAllRegions();
         return ResponseEntity.ok().body(regions);
     }
 
     @PutMapping("/{bundesland}")
     public ResponseEntity<?> updateRegion(@RequestBody Region regionDTO){
-        Optional<Region> regionOptional = regionRepository.findByBundesland(regionDTO.getBundesland());
-        if(regionOptional.isPresent()){
-            Region region = regionOptional.get();
-            region.setFaktor(regionDTO.getFaktor());
-            regionRepository.save(region);
+        Region region = regionService.updateRegion(regionDTO);
+        if(region != null){
             return ResponseEntity.ok().body(region);
         }else{
             return ResponseEntity.badRequest().body("Bundesland nicht gefunden!");
@@ -59,9 +56,8 @@ public class RegionController {
 
     @DeleteMapping("/{bundesland}")
     public ResponseEntity<?> deleteRegion(@PathVariable String bundesland){
-        Optional<Region> regionOptional = regionRepository.findByBundesland(bundesland);
-        if(regionOptional.isPresent()){
-            regionRepository.deleteById(bundesland);
+        Boolean isDeleted = regionService.deleteRegion(bundesland);
+        if(isDeleted){
             return ResponseEntity.ok().body("Region entfernt!");
         }else{
             return ResponseEntity.badRequest().body("Bundesland existiert nicht!");

@@ -23,16 +23,16 @@ public class Postleitzahl {
     public String land;
     public String stadt;
     public String bezirk;
-    public Integer plz;
+    public String plz;
 
     public String getUniqueKey(){
-        return this.bundesland + this.land + this.stadt + this.bezirk + this.plz.toString();
+        return this.bundesland + this.land + this.stadt + this.bezirk + this.plz;
     }
 
     public Postleitzahl(){
     }
 
-    public Postleitzahl(Integer plz, String bundesland, String land, String stadt, String bezirk) {
+    public Postleitzahl(String plz, String bundesland, String land, String stadt, String bezirk) {
         this.bundesland = bundesland;
         this.land = land;
         this.stadt = stadt;

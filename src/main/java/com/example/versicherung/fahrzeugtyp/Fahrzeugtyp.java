@@ -12,6 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Fahrzeugtyp {
+
     @Id
     private String fahrzeugtyp;
 

@@ -10,7 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnfrageDTO {
+
     private double kilometerleistung;
-    private int plz;
+
+    private String plz;
+
     private String fahrzeugtyp;
 }
