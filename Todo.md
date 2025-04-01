@@ -1,4 +1,7 @@
-- [ ] IO read in csv to database
-- [ ] Eingabe Rest (Kilometer, Plz Fahrzeugtyp)
+- [x] IO read in csv to database
+- [x] Eingabe Rest (Kilometer, Plz Fahrzeugtyp)
 - [ ] Fahrzeugtyp muss frei gewählt werden
-- [ ] 
+- [ ] Service für Fahrzeugtyp (Datenbank etc.) 
+- [ ] Service für Kilometerstand (Datenbank etc.) 
+- [ ] Service für VmPraemie (Datenbank etc.) 
+- [ ] (optional) Docker mysql 

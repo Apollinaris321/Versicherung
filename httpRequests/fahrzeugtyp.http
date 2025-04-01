@@ -1,0 +1,203 @@
+###
+# Kleinwagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Kleinwagen",
+  "faktor": 0.1
+}
+
+###
+
+# Kompaktwagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Kompaktwagen",
+  "faktor": 0.2
+}
+
+###
+
+# Mittelklassewagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Mittelklassewagen",
+  "faktor": 0.3
+}
+
+###
+
+# Oberklassewagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Oberklassewagen",
+  "faktor": 0.5
+}
+
+###
+
+# SUV
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "SUV",
+  "faktor": 0.7
+}
+
+###
+
+# Geländewagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Geländewagen",
+  "faktor": 0.8
+}
+
+###
+
+# Coupé
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Coupé",
+  "faktor": 0.2
+}
+
+###
+
+# Cabriolet
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Cabriolet",
+  "faktor": 0.3
+}
+
+###
+
+# Roadster
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Roadster",
+  "faktor": 0.3
+}
+
+###
+
+# Kombi
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Kombi",
+  "faktor": 0.2
+}
+
+###
+
+# Van
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Van",
+  "faktor": 0.1
+}
+
+###
+
+# Kleinbus
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Kleinbus",
+  "faktor": 0.1
+}
+
+###
+
+# Minivan
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Minivan",
+  "faktor": 0.1
+}
+
+###
+
+# Wohnmobil
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Wohnmobil",
+  "faktor": 0.9
+}
+
+###
+
+# Camper
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Camper",
+  "faktor": 0.9
+}
+
+###
+
+# Gebrauchtwagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Gebrauchtwagen",
+  "faktor": 0.1
+}
+
+###
+
+# Jahreswagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Jahreswagen",
+  "faktor": 0.15
+}
+
+###
+# Neuwagen
+POST http://localhost:8080/api/fahrzeugtyp/add
+Content-Type: application/json
+
+{
+  "fahrzeugtyp": "Neuwagen",
+  "faktor": 0.2
+}
+
+
+###
+GET http://localhost:8080/fahrzeugtyp/all
+
+
+###
+GET http://localhost:8080/fahrzeugtyp/Wohnmobil

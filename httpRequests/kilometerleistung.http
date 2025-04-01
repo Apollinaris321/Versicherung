@@ -1,0 +1,39 @@
+###
+POST http://localhost:8080/api/kilometerleistung/new
+Content-Type: application/json
+
+{
+  "von": 0,
+  "bis": 5000,
+  "faktor": 0.5
+}
+
+###
+POST http://localhost:8080/api/kilometerleistung/new
+Content-Type: application/json
+
+{
+  "von": 5001,
+  "bis": 10000,
+  "faktor": 1.0
+}
+
+###
+POST http://localhost:8080/api/kilometerleistung/new
+Content-Type: application/json
+
+{
+  "von": 10001,
+  "bis": 20000,
+  "faktor": 1.5
+}
+
+###
+POST http://localhost:8080/api/kilometerleistung/new
+Content-Type: application/json
+
+{
+  "von": 20001,
+  "bis": -1,
+  "faktor": 2.0
+}

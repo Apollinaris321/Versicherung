@@ -1,0 +1,177 @@
+### Baden-Württemberg
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Baden-Württemberg",
+  "faktor": 1.2
+}
+
+###
+
+### Berlin
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Berlin",
+  "faktor": 1.1
+}
+
+###
+
+### Bayern
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Bayern",
+  "faktor": 1.1
+}
+
+###
+
+### Brandenburg
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Brandenburg",
+  "faktor": 1.3
+}
+
+###
+
+### Nordrhein-Westfalen
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Nordrhein-Westfalen",
+  "faktor": 1.4
+}
+
+###
+
+### Bremen
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Bremen",
+  "faktor": 1.9
+}
+
+###
+
+### Hessen
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Hessen",
+  "faktor": 1.4
+}
+
+###
+
+### Hamburg
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Hamburg",
+  "faktor": 0.9
+}
+
+###
+
+### Mecklenburg-Vorpommern
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Mecklenburg-Vorpommern",
+  "faktor": 1.0
+}
+
+###
+
+### Niedersachsen
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Niedersachsen",
+  "faktor": 1.1
+}
+
+###
+
+### Rheinland-Pfalz
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Rheinland-Pfalz",
+  "faktor": 1.4
+}
+
+###
+
+### Saarland
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Saarland",
+  "faktor": 1.2
+}
+
+###
+
+### Sachsen
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Sachsen",
+  "faktor": 1.6
+}
+
+###
+
+### Sachsen-Anhalt
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Sachsen-Anhalt",
+  "faktor": 1.2
+}
+
+###
+
+### Schleswig-Holstein
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Schleswig-Holstein",
+  "faktor": 1.3
+}
+
+###
+
+### Thüringen
+POST http://localhost:8080/api/region/new
+Content-Type: application/json
+
+{
+  "bundesland": "Thüringen",
+  "faktor": 1.2
+}
+
+
+###
+GET http://localhost:8080/api/region/all

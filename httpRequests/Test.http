@@ -1,0 +1,26 @@
+### Post Prämie
+POST http://localhost:8080/api/praemie/submit
+Content-Type: application/json
+
+{
+  "fahrzeugTyp": "pkw",
+  "plz": 58540,
+  "kilometerLeistung": 1.5
+}
+
+### Get Prämie
+GET http://localhost:8080/api/praemie/init
+
+
+### Upload
+POST http://localhost:8080/api/postleitzahl/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="post.csv"
+Content-Type: text/csv
+
+< ./postcodes.csv
+--WebAppBoundary--
+
+
