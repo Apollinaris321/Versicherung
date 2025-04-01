@@ -34,6 +34,9 @@ public class VersicherungspraemieService implements IVersicherungspraemieService
 
     public Versicherungspraemie handlePraemie(AnfrageDTO anfrageDTO) {
         Postleitzahl plz = postleitzahlRepository.findDistinctFirstByPlz(anfrageDTO.getPlz());
+        if(plz == null){
+            throw new IllegalArgumentException("Postleitzahl nicht vorhanden!");
+        }
         Optional<Region> regionOptional = regionRepository.findByBundesland(plz.getBundesland());
         if(regionOptional.isEmpty()){
             throw new IllegalArgumentException("Region nicht vorhanden!");
