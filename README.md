@@ -6,12 +6,11 @@ Schema sich nicht ändert.
 Sie können Ihre eigene MySQL Datenbank anbinden, ansonsten habe ich eine in Docker bereitgestellt.
 Hierfür bitte im "src/main/resources/application.properties" die Zeile 8 verwenden anstatt 9:
 
-# Wichtig
-Wenn der Docker Container genutzt wird das Passwort nehmen (Zeile 8):
-spring.datasource.password=password
+#### Anmeldedaten
 
-diese Zeile auskommentieren (Zeile 10): 
-spring.datasource.password=
+Die Anmeldedaten für die MySQL-Datenbank in den application.properties lauten:
+spring.datasource.password=password
+spring.datasource.username=root
 
 Der Container kann gestartet werden über: 
 
